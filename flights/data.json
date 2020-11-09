@@ -1,0 +1,32 @@
+[
+    {
+        "model" : "flights.Flight",
+        "pk" : 1,
+        "fields" : {
+            "departure" : "PAR",
+            "arrival" : "LIM",
+            "book_link" : "https://google.com",
+            "price" : 2020
+        }
+    },
+    {
+        "model" : "flights.Flight",
+        "pk" : 2,
+        "fields" : {
+            "departure" : "PAR",
+            "arrival" : "LIM",
+            "book_link" : "https://google.com",
+            "price" : 2021
+        }
+    },
+    {
+        "model" : "flights.Flight",
+        "pk" : 3,
+        "fields" : {
+            "departure" : "PAR",
+            "arrival" : "LIM",
+            "book_link" : "https://google.com",
+            "price" : 2022
+        }
+    }
+]
