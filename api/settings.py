@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from api.local_settings import *
-import mongoengine
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,12 +131,16 @@ GRAPHENE = {
 }
 
 
-
-mongoengine.connect(db=ATLAS_DATABASE_NAME, host=ATLAS_HOST, username=ATLAS_USER, password=ATLAS_PWD)
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'djongo',           #'django.db.backends.sqlite3',
-#        'NAME': 'blogs',              # DB name
-#        'USER': 'root',               # DB User name <optional>
-#    }
-#}
+#mongoengine.connect(db=ATLAS_DATABASE_NAME, host=ATLAS_HOST, username=ATLAS_USER, password=ATLAS_PWD)
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        "CLIENT": {
+           "name": ATLAS_DATABASE_NAME,
+           "host": ATLAS_HOST,
+           "username": ATLAS_USER,
+           "password": ATLAS_PWD,
+           "authMechanism": "SCRAM-SHA-1",
+        }, 
+    }
+}
