@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from api.local_settings import *
+import mongoengine
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,12 +77,12 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#    'default' : {
+#         'ENGINE' : 'django_mongodb_engine',
+#         'NAME' : 'my_database',
+#     }
+# }
 
 
 # Password validation
@@ -128,3 +130,14 @@ GRAPHENE = {
         'graphene_django.debug.DjangoDebugMiddleware',
     }
 }
+
+
+
+mongoengine.connect(db=ATLAS_DATABASE_NAME, host=ATLAS_HOST, username=ATLAS_USER, password=ATLAS_PWD)
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'djongo',           #'django.db.backends.sqlite3',
+#        'NAME': 'blogs',              # DB name
+#        'USER': 'root',               # DB User name <optional>
+#    }
+#}

@@ -12,5 +12,5 @@ def home(request):
     headers = {'apiKey' : TEQUILA_API_KEY}
     params = {'fly_from':'PAR', 'dateFrom':'18/11/2020','dateTo':'12/12/2020','price_to':20, 'curr':'USD'}
     response = requests.get(url,params=params,headers=headers)
-    print(response)
+    print(request)
     return HttpResponse("the response text is %s" %  response.text)
