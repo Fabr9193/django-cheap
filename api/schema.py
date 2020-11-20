@@ -1,6 +1,7 @@
 from graphene import ObjectType, Schema
 
 from flights.schema import schema
+from users.schema import schema
 
 class Query(schema.Query, ObjectType):
     pass
