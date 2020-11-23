@@ -2,6 +2,8 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphene import ObjectType, Schema
 from flights.models import Flight
+from django.db.models import Q
+
 
 class FlightType(DjangoObjectType):
     class Meta:
@@ -9,7 +11,7 @@ class FlightType(DjangoObjectType):
 
 class Query(ObjectType):
     flight = graphene.Field(FlightType, id=graphene.Int())
-    all_flights = graphene.List(FlightType)
+    all_flights = graphene.List(FlightType,search=graphene.String())
 
     def  resolve_flight(root, info, **kwargs):
         id = kwargs.get("id")
@@ -17,7 +19,12 @@ class Query(ObjectType):
             return Flight.objects.get(id=id)
         return f"AirFrance | From:PAR | To:LIM"
 
-    def  resolve_all_flights(root, info, **kwargs):
+    def  resolve_all_flights(root, info, search=None, **kwargs):
+        if search:
+            filter = (
+                Q(departure__icontains=search) | Q(price__icontains=search)
+            )
+            return Flight.objects.filter(filter)
         return Flight.objects.all()
 
 class FlightInput(graphene.InputObjectType):

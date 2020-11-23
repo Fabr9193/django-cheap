@@ -1,14 +1,14 @@
 from graphene import ObjectType, Schema
 
-from flights.schema import schema
-from users.schema import schema
+import users.schema
+import flights.schema
 
 import graphene
 import graphql_jwt
 
-class Query(schema.Query, ObjectType):
+class Query(users.schema.Query, flights.schema.Query , ObjectType):
     pass
-class Mutation(schema.Mutation, ObjectType):
+class Mutation(users.schema.Mutation, flights.schema.Mutation,ObjectType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Refresh.Field()
