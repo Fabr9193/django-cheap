@@ -1,6 +1,7 @@
 from djongo import models
 
 # Create your models here.
+# TODO mettre a  jour les datas pour refleter toutes les données qu'on peut récuperer/utiliser
 
 
 class Flight(models.Model):
