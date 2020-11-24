@@ -6,6 +6,8 @@
             "departure" : "PAR",
             "arrival" : "LIM",
             "book_link" : "https://google.com",
+            "duration" : 3600,
+            "airline" : "AF",
             "price" : 2020
         }
     },
@@ -16,6 +18,8 @@
             "departure" : "PAR",
             "arrival" : "LIM",
             "book_link" : "https://google.com",
+            "duration" : 3600,
+            "airline" : "AF",
             "price" : 2021
         }
     },
@@ -26,6 +30,8 @@
             "departure" : "PAR",
             "arrival" : "LIM",
             "book_link" : "https://google.com",
+            "duration" : 3600,
+            "airline" : "AF",
             "price" : 2022
         }
     }

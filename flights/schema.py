@@ -31,6 +31,8 @@ class FlightInput(graphene.InputObjectType):
     departure = graphene.String()
     arrival = graphene.String()
     price = graphene.Int()
+    airline = graphene.String()
+    duration = graphene.Int()
     book_link = graphene.String()
 
 class AddFlight(graphene.Mutation):
@@ -44,6 +46,8 @@ class AddFlight(graphene.Mutation):
             departure=input.departure,
             arrival = input.arrival,
             price= input.price,
+            airline= input.airline,
+            duration= input.duration,
             book_link=input.book_link
         )
         flight.save()

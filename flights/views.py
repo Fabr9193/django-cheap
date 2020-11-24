@@ -7,9 +7,9 @@ from api.local_settings import TEQUILA_API_KEY
 # Create your views here.
 
 # routes :
-# recupere logo de la airline https://daisycon.io/images/airline/?width=50&height=50&color=ffffff&iata=fr
-# save flight in db
-# avoir des details sur le booking avec le token recupéré via la search api
+# /flights/logo recuperer logo de la airline https://daisycon.io/images/airline/?width=50&height=50&color=ffffff&iata=fr
+# /flights/save save flight in db
+# /flights/book avoir des details sur le booking avec le token recupéré via la search api
 
 
 def home(request):
