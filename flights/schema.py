@@ -3,6 +3,7 @@ from graphene_django import DjangoObjectType
 from graphene import ObjectType, Schema
 from flights.models import Flight
 from django.db.models import Q
+from django.core.exceptions import ValidationError
 
 
 class FlightType(DjangoObjectType):
@@ -53,7 +54,40 @@ class AddFlight(graphene.Mutation):
         flight.save()
         return AddFlight(flight=flight)
 
+class UpdateFlight(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+        flight_data = FlightInput(required=True)
+    flight = graphene.Field(FlightType)
+
+    def mutate(root, info, id,flight_data=None):
+        flight = Flight.objects.get(pk=id)
+        for k, v in flight_data.items():
+            if v is not None:
+                setattr(flight, k, v)
+        try:
+            flight.full_clean()
+            flight.save()
+            return UpdateFlight(Flight=flight)
+        except ValidationError as e:
+            return UpdateFlight(flight=flight, errors=e)
+
+class DeleteFlight(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+    flight = graphene.Field(FlightType)
+
+    def mutate(root, info, id):
+        flight = Flight.objects.get(pk=id)
+        try:
+            if flight is not None:
+                flight.delete()
+                return 'ok'
+        except ValidationError as e:
+            return DeleteFlight(Flight=flight, errors=e)
 class Mutation(graphene.ObjectType):
     add_flight = AddFlight.Field()
+    update_flight = UpdateFlight.Field()
+    delete_flight = DeleteFlight.Field()
 
 schema = Schema(query=Query, mutation=Mutation)
