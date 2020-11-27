@@ -24,3 +24,6 @@ def home(request):
     #--
     response = requests.get(url,params=params,headers=headers)
     return JsonResponse(response.json(), safe=False)
+
+def ping(request):
+    return HttpResponse('Hello')
