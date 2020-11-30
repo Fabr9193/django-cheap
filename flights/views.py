@@ -16,11 +16,18 @@ def home(request):
 
     url = 'https://tequila-api.kiwi.com/v2/search'
     headers = {'apiKey' : TEQUILA_API_KEY}
-    params = {'fly_from':'PAR', 'dateFrom':'26/11/2020','dateTo':'12/12/2020','price_to':20, 'curr':'USD'}
+    params = {'fly_from':'PAR', 'dateFrom':'30/11/2020','dateTo':'12/12/2020','price_to':20, 'curr':'USD'}
     
     # GET :  
     if request.method == 'GET':
-        params = {'fly_from':request.GET.get('fly_from'), 'dateFrom':request.GET.get('dateFrom'),'dateTo':request.GET.get('dateTo'),'price_to':request.GET.get('price_to'), 'curr':'USD'}
+        params = {
+            'fly_from':request.GET.get('fly_from'),
+            'dateFrom':request.GET.get('dateFrom'),
+            'dateTo':request.GET.get('dateTo'),
+            'price_to':request.GET.get('price_to'),
+            'price_from':request.GET.get('price_from'),
+            'curr':'USD', 'vehicle_type':'train,aircraft', 'locale' : 'fr'
+        }
     #--
     response = requests.get(url,params=params,headers=headers)
     return JsonResponse(response.json(), safe=False)
