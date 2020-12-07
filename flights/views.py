@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 import requests
+from django.middleware import csrf
 
 from api.local_settings import TEQUILA_API_KEY
 
@@ -30,6 +31,7 @@ def home(request):
         }
     #--
     response = requests.get(url,params=params,headers=headers)
+    csrf.get_token(request)
     return JsonResponse(response.json(), safe=False)
 
 def ping(request):
